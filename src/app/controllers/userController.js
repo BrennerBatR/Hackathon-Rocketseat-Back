@@ -1,14 +1,8 @@
 const express = require("express");
-const bcrypt = require("bcryptjs"); //encrypta senha
 const jwt = require("jsonwebtoken"); //gera token
-const crypto = require("crypto");
-const mailer = require("../../modules/mailer");
 const authMiddleware = require("../middlewares/auth");
-
 const authConfig = require("../../config/auth");
-
 const User = require("../models/User");
-
 const router = express.Router();
 
 function generateToken(params = {}) {
