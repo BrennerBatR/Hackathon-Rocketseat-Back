@@ -35,7 +35,7 @@ router.post("/register", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const users = await User.find();
-    return res.send({ users });
+    return res.send(users);
   } catch (err) {
     return res.status(500).send({ error: "Error get all users" });
   }
