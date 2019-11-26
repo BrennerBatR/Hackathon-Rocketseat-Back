@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  mongoHackathon:
+    image: "mongo"
+    container_name: mongoHackathon
+    environment:
+      - AUTH=yes
+      - MONGODB_ADMIN_USER=root
+      - MONGODB_ADMIN_PASS=root
+      - MONGODB_APPLICATION_DATABASE=hackathon
+      - MONGODB_APPLICATION_USER=root
+      - MONGODB_APPLICATION_PASS=root
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/db:/data/db
