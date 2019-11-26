@@ -44,16 +44,15 @@ router.post("/", async (req, res) => {
 router.get("/all", async (req, res) => {
   try {
     const matters = await Matter.find().populate(["user", "modules"]); //populate coloca os dados do usuario na busca
-    return res.send({ matters });
+    return res.send(matters);
   } catch (err) {
     return res.status(500).send({ error: "Error get all matters" });
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
-    const matterId = req.query.matterId;
-    const matter = await Matter.findById(matterId).populate([
+    const matter = await Matter.findById(req.params.id).populate([
       "user",
       "modules"
     ]);
@@ -61,7 +60,7 @@ router.get("/", async (req, res) => {
     if (matter === null)
       return res.status(404).send({ error: "Matter not found" });
 
-    return res.send({ matter });
+    return res.send(matter);
   } catch (err) {
     return res.status(500).send({ error: "Error get matter" });
   }
