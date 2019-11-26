@@ -8,6 +8,7 @@ app.use(bodyParser.urlencoded({ extended: false })); //entende que vou passar pa
 
 require("./app/controllers/index.js")(app);
 
-app.listen(3000, () => {
-  console.log("App is listening on port : 3000");
-}); //porta
+const PORT = Number(process.env.PORT) || 3000;
+app.listen(PORT, "0.0.0.0", () => {
+  console.log("App is listening port : ", PORT);
+}); //porta);
