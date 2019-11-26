@@ -114,4 +114,4 @@ router.delete("/:matterId", async (req, res) => {
   }
 });
 
-module.exports = app => app.use("/matters", router);
+module.exports = app => app.use("/subject", router);
