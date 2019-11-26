@@ -16,7 +16,8 @@ router.get("/", (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const { title, school } = req.body;
+    const { title, school, modules } = req.body;
+    if (!school) return res.status(400).send({ error: "School requerid" });
     if (modules == null || modules.lenght == 0)
       return res.status(400).send({ error: "Modules can't be null" });
     const matter = await Matter.create({
@@ -37,6 +38,7 @@ router.post("/", async (req, res) => {
 
     return res.send({ matter });
   } catch (err) {
+    console.log(err);
     return res.status(500).send({ error: "Error creating new matter" });
   }
 });

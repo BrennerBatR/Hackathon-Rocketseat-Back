@@ -13,15 +13,15 @@ const UserSchema = new mongoose.Schema(
       unique: true,
       lowercase: true
     },
-    /*  type: {
-    type: String,
-    required: true,
-    lowercase: true
-  }, */
     password: {
       type: String,
       require: true,
       select: false
+    },
+    school: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "School",
+      require: true
     }
   },
   {
@@ -34,7 +34,7 @@ UserSchema.pre("save", async function(next) {
   this.password = hash;
 
   next();
-}); 
+});
 const User = mongoose.model("User", UserSchema);
 
 module.exports = User;

@@ -10,6 +10,11 @@ const MatterSchema = new mongoose.Schema(
       type: String,
       require: true
     },
+    school: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "School",
+      require: true
+    },
     modules: [
       {
         type: mongoose.Schema.Types.ObjectId,

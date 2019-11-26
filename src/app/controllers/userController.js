@@ -13,11 +13,12 @@ function generateToken(params = {}) {
 
 router.use(authMiddleware);
 router.post("/register", async (req, res) => {
-  const { email } = req.body;
+  const { email, school } = req.body;
   try {
+    if (!school) return res.status(400).send({ error: "School requerid" });
     if (await User.findOne({ email }))
       return res.status(409).send({ error: "User already exists" });
-    req.body.id_user_last_edit = req.userId;
+
     const user = await User.create(req.body);
 
     user.password = undefined;
