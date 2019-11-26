@@ -1,8 +1,6 @@
 const express = require("express");
 const authMiddleware = require("../middlewares/auth");
-
 const School = require("../models/School");
-const Module = require("../models/Module");
 
 const router = express.Router();
 
@@ -60,21 +58,9 @@ router.put("/:schoolId", async (req, res) => {
       { new: true }
     );
 
-    school.modules = [];
-    await Module.remove({ school: school._id });
-
-    await Promise.all(
-      modules.map(async module => {
-        const schoolModule = new Module({ ...module, school: school._id });
-        await schoolModule.save();
-
-        school.modules.push(schoolModule);
-      })
-    );
-
     await school.save();
 
-    return res.send({ school });
+    return res.send(school);
   } catch (err) {
     console.log(err);
     return res.status(500).send({ error: "Error creating new school" });
