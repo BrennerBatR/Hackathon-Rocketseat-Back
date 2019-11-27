@@ -80,4 +80,20 @@ router.delete("/:questId", async (req, res) => {
   }
 });
 
+router.get("/module/:moduleId", async (req, res) => {
+  try {
+    const { moduleId } = req.params;
+    const quest = await Quest.find({
+      module: moduleId
+    }).populate(["module"]);
+
+    if (quest === null || quest.length == 0)
+      return res.status(404).send({ error: "Quest not found" });
+
+    return res.send(quest);
+  } catch (err) {
+    return res.status(500).send({ error: "Error get quest" });
+  }
+});
+
 module.exports = app => app.use("/quests", router);
